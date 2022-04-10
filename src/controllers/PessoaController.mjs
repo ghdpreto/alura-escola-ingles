@@ -1,3 +1,4 @@
+import { Sequelize } from 'sequelize';
 import db from '../models/index.js'
 
 class PessoaController {
@@ -172,6 +173,30 @@ class PessoaController {
         try {
             const todasAsMatriculas = await db.Matriculas.findAndCountAll({ where: { turma_id: Number(turmaId), status: 'confirmado' }})
             return response.status(200).json(todasAsMatriculas)
+        } catch (error) {
+            return response.status(500).json(error)
+        }
+    }
+
+    static async pegaTurmasLotadas(request, response) {
+        const limite = 2
+
+        try {
+
+            const turmasLotadas = await db.Matriculas.findAndCountAll({
+                where: {
+                    status: 'confirmado'
+                },
+                // campo q vai trabalhar
+                attributes: ['turma_id'],
+                // agrupa pelo campo
+                group: ['turma_id'],
+                // query bruta
+                having: Sequelize.literal(`count(turma_id) >= ${limite}`)
+            })
+
+
+            return response.status(200).json(turmasLotadas.count)
         } catch (error) {
             return response.status(500).json(error)
         }
