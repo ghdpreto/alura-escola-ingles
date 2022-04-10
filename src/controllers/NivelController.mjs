@@ -51,6 +51,19 @@ class NivelController {
             return response.status(500).json(error.message)
         }
     }
+
+    static async restauraNivel(request, response) {
+        const {id} = request.params
+
+        try {
+            await db.Niveis.restore({where: {id: Number(id) }})
+
+            return response.status(200).json({mensagem: `id ${id} restaurado`})
+
+        } catch (error) {
+            return response.status(500).json(error)
+        }
+    }
     
 }
 

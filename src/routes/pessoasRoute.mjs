@@ -7,6 +7,7 @@ const pessoasRoute = Router();
 pessoasRoute.get('/:id', PessoaController.pegaUmaPessoa)
 pessoasRoute.get('/', PessoaController.pegaTodasAsPessoas)
 pessoasRoute.post('/', PessoaController.criaPessoa)
+pessoasRoute.post('/:id/restaura', PessoaController.restauraPessoa)
 pessoasRoute.put('/:id', PessoaController.atualizaPessoa)
 pessoasRoute.delete('/:id', PessoaController.apagaPessoa)
 

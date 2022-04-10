@@ -9,6 +9,7 @@ niveisRoute.get('/:id', NivelController.pegaUmNivel)
 niveisRoute.post('/', NivelController.criaNivel)
 niveisRoute.put('/:id', NivelController.atualizaNivel)
 niveisRoute.delete('/:id', NivelController.apagaNivel)
+niveisRoute.post('/:id/restaura', NivelController.restauraNivel)
 
 
 export { niveisRoute }
