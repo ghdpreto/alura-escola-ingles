@@ -4,8 +4,9 @@ import { PessoaController } from "../controllers/PessoaController.mjs";
 const pessoasRoute = Router();
 
 
+pessoasRoute.get('/todos', PessoaController.pegaTodasAsPessoas)
+pessoasRoute.get('/', PessoaController.pegaTodasAsPessoasAtivas)
 pessoasRoute.get('/:id', PessoaController.pegaUmaPessoa)
-pessoasRoute.get('/', PessoaController.pegaTodasAsPessoas)
 pessoasRoute.post('/', PessoaController.criaPessoa)
 pessoasRoute.post('/:id/restaura', PessoaController.restauraPessoa)
 pessoasRoute.put('/:id', PessoaController.atualizaPessoa)

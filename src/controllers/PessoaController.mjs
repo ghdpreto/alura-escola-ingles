@@ -1,9 +1,19 @@
 import db from '../models/index.js'
 
 class PessoaController {
+    static async pegaTodasAsPessoasAtivas(request, response) {
+        try {
+            const pessoasAtivas = await db.Pessoas.findAll();
+            return response.status(200).json(pessoasAtivas)
+        } catch (error) {
+            return response.status(500).json(error)
+        }
+    }
+
     static async pegaTodasAsPessoas(request, response) {
         try {
-            const todasAsPessoas = await db.Pessoas.findAll();
+            //utilizando scopo todos
+            const todasAsPessoas = await db.Pessoas.scope('todos').findAll();
     
             return response.status(200).json(todasAsPessoas)
         } catch (error) {
