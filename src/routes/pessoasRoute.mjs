@@ -13,6 +13,8 @@ pessoasRoute.post('/:id/restaura', PessoaController.restauraPessoa)
 pessoasRoute.put('/:id', PessoaController.atualizaPessoa)
 pessoasRoute.delete('/:id', PessoaController.apagaPessoa)
 
+pessoasRoute.post('/:estudanteId/cancela', PessoaController.cancelaPessoa)
+
 pessoasRoute.get('/matricula/:turmaId/confirmadas', PessoaController.pegaMatriculasPorTurma)
 pessoasRoute.get('/matricula/lotada', PessoaController.pegaTurmasLotadas)
 
