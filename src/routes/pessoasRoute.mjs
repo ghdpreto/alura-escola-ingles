@@ -7,6 +7,7 @@ const pessoasRoute = Router();
 pessoasRoute.get('/todos', PessoaController.pegaTodasAsPessoas)
 pessoasRoute.get('/', PessoaController.pegaTodasAsPessoasAtivas)
 pessoasRoute.get('/:id', PessoaController.pegaUmaPessoa)
+pessoasRoute.get('/:estudanteId/matricula', PessoaController.pegaMatricula)
 pessoasRoute.post('/', PessoaController.criaPessoa)
 pessoasRoute.post('/:id/restaura', PessoaController.restauraPessoa)
 pessoasRoute.put('/:id', PessoaController.atualizaPessoa)

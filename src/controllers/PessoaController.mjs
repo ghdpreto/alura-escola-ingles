@@ -150,6 +150,21 @@ class PessoaController {
             return response.status(500).json(error)
         }
     }
+
+    static async pegaMatricula(request, response) {
+        const { estudanteId } = request.params
+
+        try {
+            //const matricula = await db.Matriculas.findAll({ where: {estudante_id: Number(estudanteId)}})
+            // usando escopo de associacao / usando mixins
+            const pessoa = await db.Pessoas.findOne({where: {id: Number(estudanteId)}})
+            const matriculas = await pessoa.getAulasMatriculadas();
+
+            return response.status(200).json(matriculas)
+        } catch (error) {
+            return response.status(500).json(error)
+        }
+    }
 }
 
 export { PessoaController }
