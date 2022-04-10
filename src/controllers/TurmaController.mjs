@@ -1,9 +1,18 @@
 import db from '../models/index.js'
+import { Op } from 'sequelize';
 
 class TurmaController {
     static async pegaTodasAsTurmas(request, response) {
+        const {dtInicial, dtFinal} = request.query
+        const where = {}
+
+        //construindo where com between
+        dtInicial || dtFinal ? where.data_inicio = {} : null
+        dtInicial ? where.data_inicio[Op.gte] = dtInicial : null
+        dtFinal ? where.data_inicio[Op.lte] = dtFinal: null
+        console.log(where)
         try {
-            const todasAsTurmas = await db.Turmas.findAll();
+            const todasAsTurmas = await db.Turmas.findAll({ where });
             return response.status(200).json(todasAsTurmas)
         } catch (error) {
             return response.status(500).json(error.message)
