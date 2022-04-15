@@ -12,17 +12,51 @@ module.exports = (sequelize, DataTypes) => {
     static associate(models) {
       // define association here
       Pessoas.hasMany(models.Turmas, {foreignKey: 'docente_id'}) 
-      Pessoas.hasMany(models.Matriculas, {foreignKey: 'estudante_id'})
+      Pessoas.hasMany(models.Matriculas, {
+        foreignKey: 'estudante_id', 
+        scope: {
+          // scope de associacao 
+          // somente com status confirmados
+          status: 'confirmado',
+      },
+      // nome do escopo
+      as: 'aulasMatriculadas'
+    })
     }
   }
   Pessoas.init({
-    nome: DataTypes.STRING,
+    nome: {
+      type: DataTypes.STRING,
+      validate: {
+        funcaoValidadora: function(dado) {
+          if(dado.length < 3) throw new Error('o campo novo de ter mais de 3 caracteres')
+        }
+      }
+    },
     ativo: DataTypes.BOOLEAN,
-    email: DataTypes.STRING,
+    email: {
+      type: DataTypes.STRING,
+      validate: {
+          isEmail: {
+              args: true,
+              msg: 'Dado do tipo e-mail inválidos'
+          }
+        }
+      },
     role: DataTypes.STRING
   }, {
     sequelize,
     modelName: 'Pessoas',
+    paranoid: true,
+
+    //escopo default
+    defaultScope: {
+      where: { ativo: true }
+    },
+    scopes: {
+      todos: { where: {} }
+      //outros escopos com regras
+    }
   });
   return Pessoas;
 };
