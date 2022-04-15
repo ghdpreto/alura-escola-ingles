@@ -1,4 +1,6 @@
 import { TurmasServices } from "./TurmasServices.mjs";
-export { TurmasServices };
 import { PessoasServices } from "./PessoasServices.mjs";
-export { TurmasServices, NiveisServices };
+import { NiveisServices } from "./NiveisServices.mjs";
+import { MatriculasServices } from "./MatriculasServices.mjs";
+
+export { TurmasServices, PessoasServices, NiveisServices, MatriculasServices };

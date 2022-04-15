@@ -9,8 +9,8 @@ class Services {
     return await db[this.nomeDoModelo].findAll({ where: { ...where } });
   }
 
-  async pegaUmRegistro(id) {
-    return await db[this.nomeDoModelo].findOne({ where: { id: id } });
+  async pegaUmRegistro(where = {}) {
+    return await db[this.nomeDoModelo].findOne({ where: { ...where } });
   }
 
   async criaRegistro(dados) {
@@ -43,6 +43,13 @@ class Services {
 
   async restauraRegistro(id) {
     return await db[this.nomeDoModelo].restore({ where: { id: id } });
+  }
+
+  async encontraEContaRegistros(where = {}, agregadores) {
+    return db[this.nomeDoModelo].findAnCountAll({
+      where: { ...where },
+      ...agregadores,
+    });
   }
 }
 

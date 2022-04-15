@@ -12,7 +12,6 @@ class TurmaController {
     dtInicial || dtFinal ? (where.data_inicio = {}) : null;
     dtInicial ? (where.data_inicio[Op.gte] = dtInicial) : null;
     dtFinal ? (where.data_inicio[Op.lte] = dtFinal) : null;
-    console.log(where);
 
     try {
       const todasAsTurmas = await turmaServices.pegaTodosOsRegistros(where);
