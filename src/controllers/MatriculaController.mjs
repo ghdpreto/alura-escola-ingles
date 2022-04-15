@@ -83,7 +83,7 @@ class MatriculaController {
     try {
       const todasAsMatriculas = await matriculaServices.encontraEContaRegistros(
         {
-          turmaId: Number(turmaId),
+          turma_id: Number(turmaId),
           status: "confirmado",
         },
         { limit: 20, order: [["estudante_id", "DESC"]] }

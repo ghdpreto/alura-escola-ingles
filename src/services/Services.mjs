@@ -46,7 +46,7 @@ class Services {
   }
 
   async encontraEContaRegistros(where = {}, agregadores) {
-    return db[this.nomeDoModelo].findAnCountAll({
+    return db[this.nomeDoModelo].findAndCountAll({
       where: { ...where },
       ...agregadores,
     });
